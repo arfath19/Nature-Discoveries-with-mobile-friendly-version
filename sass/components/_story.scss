@@ -1,0 +1,77 @@
+.story{
+    width: 75%;
+    margin : 0 auto;
+    box-shadow: 0 3rem 6rem rgba($color-black,.1);
+    background-color: rgba($color-white,.6);
+    border-radius: 3px;
+    padding: 6rem ;
+    padding-left:9rem;
+    font-size: $default-font-size;
+    transform: skewX(-12deg);// for non rectangular shape for the element 
+
+    @include respond(tab-port){
+        width: 100%;
+        padding: 4rem;
+        padding-left: 7rem;
+    }
+
+    @include respond(phone){
+        transform: skewX(0);
+    }
+    
+     
+    &__shape{
+        width: 15rem;
+        height: 15rem;
+        float:left;//if no float then the text will come below the circle
+        -webkit-shape-outside: circle(50% at 50% 50%);
+        shape-outside: circle(50% at 50% 50%);// 50% tells the radius and at 50% 50% tells at the centre of the circle hori and vert
+        -webkit-clip-path: circle(50% at 50% 50%);
+        clip-path: circle(50% at 50% 50%);// now clippath makes the photo in a circle shape from square
+        transform: translateX(-3rem) skewX(12deg);// it gives a margin b/w the circle and text 
+        position: relative; // for caption
+        
+        @include respond(phone){
+            transform:  translateX(-3rem) skewX(0);
+        }
+    }
+
+    &__img{
+        height: 100%;// it gives 15rem from parent
+        transform: translateX(-4rem) scale(1.4);
+        backface-visibility: hidden;
+        transition: all .5s;
+    }
+
+    &__text{
+        transform: skewX(12deg);
+        @include respond(phone){
+            transform:  skewX(0);
+        }
+    }
+
+    &__caption{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50% ,20%); // caption of marysmith at 20 in Y axis so tht it is invisible i.e.opacity=0 and when hovered it should be visible opacity=1 and translate at Y -50%       
+        color: $color-white;
+        text-transform: uppercase;
+        font-size: 1.7rem;
+        text-align: center;
+        opacity: 0;
+        transition: all .5s;
+        backface-visibility: hidden;
+    }
+    &:hover &__caption{
+        opacity: 1;
+        transform: translate(-50%,-50%);
+
+    }
+    &:hover &__img{
+        transform: translateX(-4rem) scale(1);
+        filter: blur(3px) brightness(80%);// 80% makes darker and when above 100 makes bright
+
+    }
+
+}

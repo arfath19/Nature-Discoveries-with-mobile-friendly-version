@@ -1,0 +1,110 @@
+.form{
+    &__group:not(:last-child){
+        margin-bottom: 2rem;
+    }
+
+    &__input{
+        font-size: 1.5rem;
+        font-family: inherit;//auto inherits all the font family
+        color: inherit;
+        padding: 1.5rem 2rem;
+        border-radius: 2px;
+        background-color: rgba($color-white,.5);
+        border: none;
+        border-bottom: 3px solid transparent;
+        width:90%;
+        display: block;
+        transition: all .3s;
+        @include respond(tab-port){
+            width: 100%; 
+            
+        }
+
+        &:focus{
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba($color-black,.1);
+            border-bottom: 3px solid $color-primary;
+    
+        }
+        &:focus:invalid{
+            border-bottom: 3px solid $color-secondary-dark;
+        }
+
+        &::-webkit-input-placeholder{
+            // placeholder of form
+            color: $color-grey-dark-2;
+            
+        }
+
+    }
+   
+   
+    &__label{
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 2rem;
+        margin-top: .7rem;
+        display:block;
+        transition: all .3s;//animation of .3s to fade in and out
+    }
+
+    &__input:placeholder-shown + &__label{ // placeholder shown gets the effect of Full name displayed when we strt typing and else is hidden  and + indicates tht both input fullname and email are in same level so they cant be made parent and so we can select both of them by placing '+' opertor and for more than 2 use ~ which selects all
+        opacity: 0;
+        visibility: hidden;// hidden so tht label and text-field doesnt merge and collapse
+        transform: translateY(-4rem);//Full name  comes from above        
+    }
+
+    &__radio-group{
+        width: 49%;
+        display: inline-block;// dont create linebreaks and come side by side
+        @include respond(tab-port){
+            width: 100%; 
+            margin-bottom: 1rem; 
+        }
+
+    }
+
+    &__radio-input{
+        display: none;// finally at last hide the radio btn circle
+        
+    }
+
+    &__radio-label{
+        font-size: $default-font-size;
+        cursor: pointer;
+        position: relative;
+        padding-left: 4.5rem;
+    }
+    &__radio-button{
+        height: 3rem;
+        width: 3rem;
+        border: 5px solid $color-primary;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: -.4rem;
+
+
+        &::after{
+            content: "";
+            display: block;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: $color-primary;
+            opacity: 0;
+            transition: opacity .2s;
+        }
+    }
+
+    &__radio-input:checked  ~ &__radio-label &__radio-button::after{ // first select the checked radio btn then its sibling selector with ~ and then its child which is the radio-button        
+        opacity: 1;
+        
+
+    }
+}

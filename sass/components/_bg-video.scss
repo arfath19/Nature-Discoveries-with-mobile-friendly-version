@@ -1,0 +1,17 @@
+.bg-video{
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: .15;
+    overflow: hidden;// makes the video size to the exact proportion of the section size
+
+    &__content{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;//this fills the video to the section size i.e the stories section entirely without occupying extra width like the video has
+
+    }
+}
